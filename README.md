@@ -14,6 +14,30 @@ A convolutional neural network (CNN) is a type of machine learning model that is
 * The best model was then used to classify the three images made in Paint where it was 100\% accurate
 
 ## MLOps Implementation (WIP)
-* Testing (Pytest), Containerization (Docker), Deployment (Cloud Run)
+### Training results
+![model_training_results](images/metric_results.png)
+* epoch_loss is the average training loss
+* val_loss is the average validation loss 
+### Testing
+The project includes a suite of automated tests using `pytest` to ensure model reliability and input validation.
+
+<details>
+<summary>View Test Results</summary>
+
+```bash
+================================================== test session starts ==================================================
+platform win32 -- Python 3.11.5, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\joelb\Documents\GitHub\CNN_number_prediction
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 5 items                                                                                                        
+
+tests\test_model.py .....                                                                                          [100%]
+
+=================================================== 5 passed in 6.16s =================================================== 
+```
+</details>
+
+* Containerization (Docker), Deployment (Cloud Run)
 ## Live Service (WIP)
 * A clickable link to the live hosted API and a clear explanation of how to use it.

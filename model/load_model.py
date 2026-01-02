@@ -1,15 +1,21 @@
-import torch
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
-import torch.nn as nn
-import torch.optim as optim
-from torch.cuda.amp import autocast, GradScaler
-from torch.optim.lr_scheduler import ReduceLROnPlateau
+# import torch
+# from torchvision import datasets, transforms
+# from torch.utils.data import DataLoader
+# import torch.nn as nn
+# import torch.optim as optim
+# from torch.cuda.amp import autocast, GradScaler
+# from torch.optim.lr_scheduler import ReduceLROnPlateau
+# import matplotlib.pyplot as plt
+# from PIL import Image
+# import mlflow
+# from mlflow.models import infer_signature
+# from pathlib import Path
 import matplotlib.pyplot as plt
+import torch
+import torch.nn as nn
+from torchvision import transforms
 from PIL import Image
-import mlflow
-from mlflow.models import infer_signature
-
+from pathlib import Path
 
 class CNN(nn.Module):
     def __init__(self, input_size=(28, 28)):
@@ -59,8 +65,48 @@ class CNN(nn.Module):
         return x
     
     
-def get_best_model():
-    best_model = CNN()
-    best_model.load_state_dict(torch.load('best_model.pth'))
-    best_model.eval()  # set to evaluation mode not training
-    return best_model
+def get_best_model(device="cpu"):
+    model = CNN().to(device)
+
+    model_path = Path(__file__).parent / "best_model.pth"
+    state = torch.load(model_path, map_location=device)
+
+    model.load_state_dict(state)
+    model.eval() # set to evaluation mode not training
+    return model
+
+def transform_image(image):
+    #new transform so new data matches format of train/test data
+    transform = transforms.Compose([
+        transforms.Resize((28, 28)),
+        transforms.Grayscale(),
+        transforms.functional.invert,
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])
+    return transform(image).unsqueeze(0)  # add batch dimension
+
+def predict_digit(image_path, model):
+    # load and preprocess image
+    if not isinstance(image_path, (str, Path)):
+        raise TypeError("image_path must be a path")
+
+    if not Path(image_path).exists():
+        raise FileNotFoundError(f"{image_path} does not exist")
+    image = Image.open(image_path)
+    image = transform_image(image)
+
+    # prediction
+    with torch.no_grad():
+        output = model(image)
+        _, predicted = torch.max(output, 1)
+        probabilities = torch.nn.functional.softmax(output, dim=1)
+
+    return predicted.item(), probabilities.squeeze().tolist()
+
+def show_transformed_image(image_path):
+    # load and preprocess image
+    image = Image.open(image_path)
+    image = transform_image(image)
+    plt.imshow(image.squeeze(), cmap='gray')#show new preprocessed image
+    plt.show()
