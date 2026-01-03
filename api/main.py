@@ -18,7 +18,7 @@ app = FastAPI()
 model = get_best_model()
 
 #temporary folder
-upload_dir = Path("temp_uploads")
+upload_dir = Path("/tmp/temp_uploads")
 upload_dir.mkdir(exist_ok=True)
 
 templates = Jinja2Templates(directory="api/templates")

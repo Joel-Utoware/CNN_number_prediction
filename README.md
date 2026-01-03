@@ -77,7 +77,51 @@ For a higher chance of a succesful prediction, images must a whole number betwee
 
 </details>
 
-* Containerization (Docker), Deployment (Cloud Run)
+### Containerization (Docker)
+The project was containerised using docker and docker compose was used to deploy the mlfow and FastApi at the same time.
+<details>
+  
+<summary>MlFlow and FastAPI together</summary>
 
-## Live Service (WIP)
-* A clickable link to the live hosted API and a clear explanation of how to use it.
+![MlFlow and FastAPI together](images/docker_duo.png)
+
+</details>
+
+<details>
+  
+<summary>Recieving request</summary>
+
+![recieving request](images/dockerports.png)
+
+</details>
+
+<details>
+  
+<summary>Docker console</summary>
+
+![docker console](images/docker_image.png)
+
+</details>
+
+### Deployment (Cloud Run)
+The model is available to try while it is still hosted on Google cloud services. 
+
+<details>
+  
+<summary>Google cloud console</summary>
+
+![Google cloud console](images/Gcloud_use.png)
+
+</details>
+
+<details>
+  
+<summary>Working on Google cloud</summary>
+
+![working on Google cloud](images/Gcloud_image.png)
+
+</details>
+
+## Live Service 
+Link to try the model:
+[try the model](https://mnist-api-1097413744504.us-central1.run.app)

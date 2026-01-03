@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mnist_api:
+    build: .
+    container_name: mnist_api_container
+    ports:
+      - "8000:8000"
+    # We map the local temp_uploads folder to the container's folder
+    # This prevents the "not found" errors when the API tries to write/delete
+    volumes:
+      - ./temp_uploads:/app/temp_uploads
+    # This tells the API where to find the MLflow service
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow_server:5000
+    depends_on:
+      - mlflow_server
+
+  mlflow_server:
+    image: ghcr.io/mlflow/mlflow
+    container_name: mlflow_ui_container
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app_root  # Mounts your whole project folder so Docker can see mlflow.db
+    # We tell MLflow to use the database file located in /app_root
+    command: >
+      mlflow ui 
+      --backend-store-uri sqlite:////app_root/mlflow.db 
+      --default-artifact-root /app_root/mlruns
+      --host 0.0.0.0 
+      --port 5000
