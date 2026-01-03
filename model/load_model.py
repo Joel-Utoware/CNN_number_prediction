@@ -1,22 +1,10 @@
-# import torch
-# from torchvision import datasets, transforms
-# from torch.utils.data import DataLoader
-# import torch.nn as nn
-# import torch.optim as optim
-# from torch.cuda.amp import autocast, GradScaler
-# from torch.optim.lr_scheduler import ReduceLROnPlateau
-# import matplotlib.pyplot as plt
-# from PIL import Image
-# import mlflow
-# from mlflow.models import infer_signature
-# from pathlib import Path
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 from torchvision import transforms
 from PIL import Image
 from pathlib import Path
-
+import os
 class CNN(nn.Module):
     def __init__(self, input_size=(28, 28)):
         super().__init__()
@@ -67,8 +55,9 @@ class CNN(nn.Module):
     
 def get_best_model(device="cpu"):
     model = CNN().to(device)
-
-    model_path = Path(__file__).parent / "best_model.pth"
+    
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(base_dir, "best_model.pth")
     state = torch.load(model_path, map_location=device)
 
     model.load_state_dict(state)
