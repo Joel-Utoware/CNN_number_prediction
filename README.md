@@ -25,7 +25,8 @@ A convolutional neural network (CNN) is a type of machine learning model that is
 * It achieved a validation accuracy of 99.5% 
 * The best model was then used to classify the three images made in Paint where it was 100\% accurate
 
-## MLOps Implementation (WIP)
+## MLOps Implementation
+After the project was completed I decided to update it further by adding aditional features. One feature was to implement tracking using MlFlow to track the model's training. 
 ### Training results
 ![model_training_results](images/metric_results.png)
 * epoch_loss is the average training loss
@@ -52,7 +53,7 @@ tests\test_model.py .....                                                       
 </details>
 
 ### FastAPI Integration
-Have now implementd Fast API and HTML code to allow users to be able to upload images for the model to try and predict. If live service is unavailble users can use the local site when running FastAPI or the /docs endpoint.
+Additionally I have now implemented Fast API and HTML code to allow users to be able to upload images for the model to try and predict. If live service is unavailable users can use the local site when running FastAPI or the /docs endpoint.
 
 <details>
 <summary>succesful_upload</summary>
@@ -90,7 +91,7 @@ For a higher chance of a succesful prediction, images must a whole number betwee
 </details>
 
 ### Containerization (Docker)
-The project was containerised using docker and docker compose was used to deploy the mlfow and FastApi at the same time.
+The project was containerised using docker. Docker compose was used to deploy the mlfow and FastApi at the same time.
 <details>
   
 <summary>MlFlow and FastAPI together</summary>
