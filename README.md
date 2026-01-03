@@ -1,5 +1,17 @@
 # CNN-number-prediction
+
+## Live Service 
+Link to try the model:
+[try the model](https://mnist-api-1097413744504.us-central1.run.app)
+
+## Setup to optionaly run via Docker
+    git clone https://github.com/Joel-Utoware/CNN_number_prediction.git
+    docker build -t mnist-api .
+    docker run -p 8080:8080 mnist-api
+
+
 ## Project overview
+![Architecture](images/Architecture.png)
 ### What is a convolutional neural network?
 A convolutional neural network (CNN) is a type of machine learning model that is often used in image recognition.
 ### What data was used in this project?
@@ -40,7 +52,7 @@ tests\test_model.py .....                                                       
 </details>
 
 ### FastAPI Integration
-Have now implementd Fast API and HTML code to allow users to be able to upload images for the model to try and predict.
+Have now implementd Fast API and HTML code to allow users to be able to upload images for the model to try and predict. If live service is unavailble users can use the local site when running FastAPI or the /docs endpoint.
 
 <details>
 <summary>succesful_upload</summary>
@@ -122,6 +134,4 @@ The model is available to try while it is still hosted on Google cloud services.
 
 </details>
 
-## Live Service 
-Link to try the model:
-[try the model](https://mnist-api-1097413744504.us-central1.run.app)
+
