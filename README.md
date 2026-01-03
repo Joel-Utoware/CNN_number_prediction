@@ -36,30 +36,47 @@ tests\test_model.py .....                                                       
 
 =================================================== 5 passed in 6.16s =================================================== 
 ```
+
 </details>
+
 ### FastAPI Integration
 Have now implementd Fast API and HTML code to allow users to be able to upload images for the model to try and predict.
+
 <details>
 <summary>succesful_upload</summary>
+  
 ![succesful_upload](images/success.png)
+
 </details>
 
 <details>
+  
 <summary>no_upload</summary>
+
 ![no_upload](images/no_upload.png)
+
 </details>
 
 <details>
+  
 <summary>wrong_file</summary>
+
 ![wrong_file](images/wrong_file_type.png)
+
 </details>
 
 For a higher chance of a succesful prediction, images must a whole number between 0 and 9  on a white background. 
+
 <details>
+  
 <summary>For example</summary>
+
 ![number 1](tests/data/num_1.png)
+
 ![number 5](tests/data/num_5.png)
+
 </details>
+
 * Containerization (Docker), Deployment (Cloud Run)
 
 ## Live Service (WIP)
